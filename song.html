@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html ng-app="song">
+<head>
+    <title>
+        Music Search
+    </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body ng-controller="songcntrl">
+
+<div class="jumbotron" style="text-align:center"><h1>Music Search</h1></div>
+<br><br>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+        <input type="textbox" class="form-control" ng-model="name" autofocus placeholder="Enter album name"><br>
+        <b>Select a Album to play the tracks in it</b>
+        <div ng-repeat="i in data1.dataset | filter:name">
+            <div class="media">
+                <div class="media-left media-middle">
+                    <div class="row">
+                        <div class="media-object">
+                            <div class="col-md-3">
+                                <img ng-src="{{i.album_image_file}}" width="100%" height="100%"></div>
+                        </div>
+                        <div class="media-body">
+                            <blockquote>
+                                <h3>{{i.album_title}}</h3>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <p><b>Date Released::</b>{{i.album_date_created}}</p>
+                                        <p><b>Number of Tracks::</b>{{i.album_tracks}}</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input class="form-control " type="radio" ng-click="call(i.album_id)" align="right" name="val" ng-model="selection" ng-value="i.album_id"></div></div>
+                            </blockquote>
+
+                        </div>
+                    </div>
+                </div>
+                <hr />
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div ng-repeat="i in data2.dataset">
+            <div class="media sibling">
+                <div class="media-left media-middle">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="media-object">
+
+                                <img ng-src="{{i.track_image_file}}" height="50" width="50">
+                            </div></div>
+                        <div class="col-md-6">
+                            <div class="media-body">
+                                <blockquote>
+                                    <a ng-href="{{i.track_url}}"><h3>{{i.track_title}}</h3></a>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+													<span>
+														<a ng-click="getArtist(i.artist_id)"class="icon"></a>
+                                                            <span class="glyphicon glyphicon-chevron-down"></span>
+
+                                                    </span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="sibling"></div>
+
+        </div>
+
+
+
+    </div>
+</div>
+<footer>Music Search</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<script type="text/javascript" src="js/song.js"></script>
+</body>
+</html>
