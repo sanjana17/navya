@@ -6,15 +6,15 @@ angular.module('myApp', [])
         fetch();
       });
 
-      $scope.search = Sherlock Holmes;
+      $scope.search = "Sherlock Holmes";
 
       function fetch() {
-        $http.get(httpwww.omdbapi.comt= + $scope.search + &tomatoes=true&plot=full)
+        $http.get("http://www.omdbapi.com/?t=" + $scope.search + "&tomatoes=true&plot=full")
             .then(function(response) {
               $scope.details = response.data;
             });
 
-        $http.get(httpwww.omdbapi.coms= + $scope.search)
+        $http.get("http://www.omdbapi.com/?s=" + $scope.search)
             .then(function(response) {
               $scope.related = response.data;
             });
