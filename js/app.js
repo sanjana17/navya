@@ -6,7 +6,7 @@ angular.module('myApp', [])
         fetch();
       });
 
-      $scope.search = "Sherlock Holmes";
+      $scope.search = "";
 
       function fetch() {
         $http.get("http://www.omdbapi.com/?t=" + $scope.search + "&tomatoes=true&plot=full")
