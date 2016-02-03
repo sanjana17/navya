@@ -8,25 +8,29 @@
 
   <div class="animated zoomInRight">
     <div class="input-group search-bar">
-      <input type="text" ng-model="search" ng-model-options="{ debounce: 800 }" onclick="select()" class="form-control" placeholder="Enter full movie name" autofocus />
+      <input type="text" ng-model="search" ng-model-options="{ debounce: 0 }" onclick="select()" class="form-control" placeholder="Enter full movie name" autofocus />
       <span class="input-group-addon bar-style"><i class="glyphicon glyphicon-search"></i></span>
     </div>
 
-    <div id="main-info" class="col-md-8">
+    <div ng-show="search"id="main-info" class="col-md-8">
       <div ng-if="!details">
         Loading results...
       </div>
-
+      <br>
+      <br>
+      <span class="span-outer">
+         TITLE:: <a href="http://imdb.com/title/{{ details.imdbID }}" target="_blank">{{ details.Title }}</a>
+        </span>
+        <br>
+        <br>
       <div ng-if="details.Response==='True'">
         <img ng-src="{{ details.Poster=='N/A' ? 'http://placehold.it/150x220&text=N/A' : details.Poster }}" class="thumbnail animated flip movie-poster">
 
-        <span class="span-outer">
-          <a href="http://imdb.com/title/{{ details.imdbID }}" target="_blank">{{ details.Title }}</a>
-        </span>, {{ details.Year }}
+
 
         <p><strong>Released on:</strong> {{ details.Released }} ({{ details.Runtime }})</p>
 
-        <p>{{ details.Plot }}</p>
+        <p>STORY LINE::{{ details.Plot }}</p>
 
         <p class="outer-p">
         <div class="inner-p">
@@ -59,7 +63,7 @@
       </div>
 
       <div ng-if="details.Response==='False'">
-        No results found.
+
       </div>
     </div>
 
