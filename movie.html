@@ -19,9 +19,9 @@
             </div>
             <br>
             <br>
-      <span class="span-outer">
-        <b>TITLE::</b> <a href="http://imdb.com/title/{{ details.imdbID }}" target="_blank">{{ details.Title }}</a>
-        </span>
+				<span class="span-outer">
+					<b>TITLE::</b> <a href="http://imdb.com/title/{{ details.imdbID }}" target="_blank">{{ details.Title }}</a>
+			</span>
             <br>
             <br>
             <div ng-if="details.Response==='True'">
@@ -61,13 +61,13 @@
                     <a ng-href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Buy this movie!</a>
                 </p>
             </div>
-
+		</div>
             <div ng-if="details.Response==='False'">
 
             </div>
 
 
-            <div id="related-results" class="col-md-4 animated bounce related-results">
+            <div id="related-results" class="col-md-10 animated bounce related-results">
                 <div ng-if="related.Response!=='False'">
                     Related Results:
                     <hr>
@@ -79,7 +79,7 @@
                     </ul>
                 </div>
             </div>
-            </div>
+            
 
         </div>
     </div>
