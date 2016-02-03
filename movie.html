@@ -9,7 +9,7 @@
 
   <div class="animated zoomInRight">
     <div class="input-group search-bar">
-      <input type="text" ng-model="search" ng-model-options="{ debounce: 0 }" onclick="select()" class="form-control" placeholder="Enter full movie name" autofocus />
+      <input type="text" ng-model="search" ng-model-options="{ debounce: 0 }" ng-keyenter="call(search)" class="form-control" placeholder="Enter full movie name" autofocus />
       <span class="input-group-addon bar-style"><i class="glyphicon glyphicon-search"></i></span>
     </div>
 
@@ -74,7 +74,7 @@
 
         <ul class="rel-results">
           <li ng-repeat="movie in related.Search.slice(1,related.Search.length)">
-            <a href="" id="{{ $index + 1 }}" ng-click="update(movie)">{{ movie.Title }}</a>, {{ movie.Year }}
+            <a href="" id="{{ $index + 1 }}" ng-click="call(movie.Title)">{{ movie.Title }}</a>, {{ movie.Year }}
           </li>
         </ul>
       </div>
