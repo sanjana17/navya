@@ -1,84 +1,85 @@
 <div class="container-fluid outerdiv" ng-app="myApp" ng-controller="MovieController"
      xmlns="http://www.w3.org/1999/html">
 
-  <noscript>
-    <div class="nojs">
-        Javascript is either disabled or not supported in your browser.
-        Please enable it or use a Javascript enabled browser.</div>
-  </noscript>
+    <noscript>
+        <div class="nojs">
+            Javascript is either disabled or not supported in your browser.
+            Please enable it or use a Javascript enabled browser.</div>
+    </noscript>
 
-  <div class="animated zoomInRight">
-    <div class="input-group search-bar">
-      <input type="text" ng-model="search" ng-model-options="{ debounce: 0 }" ng-change="call(search)" class="form-control" placeholder="Enter full movie name" autofocus />
-      <span class="input-group-addon bar-style"><i class="glyphicon glyphicon-search"></i></span>
-    </div>
-
-    <div ng-show="search"id="main-info" class="col-md-6">
-      <div ng-if="!details">
-        Loading results...
-      </div>
-      <br>
-      <br>
+    <div class="animated zoomInRight">
+        <div class="input-group search-bar">
+            <input type="text" ng-model="search" ng-model-options="{ debounce: 0 }" ng-change="call(search)" class="form-control" placeholder="Enter full movie name" autofocus />
+            <span class="input-group-addon bar-style"><i class="glyphicon glyphicon-search"></i></span>
+        </div>
+    <div class="row">
+        <div ng-show="search"id="main-info" class="col-md-6">
+            <div ng-if="!details">
+                Loading results...
+            </div>
+            <br>
+            <br>
       <span class="span-outer">
         <b>TITLE::</b> <a href="http://imdb.com/title/{{ details.imdbID }}" target="_blank">{{ details.Title }}</a>
         </span>
-        <br>
-        <br>
-      <div ng-if="details.Response==='True'">
-        <img ng-src="{{ details.Poster=='N/A' ? 'http://placehold.it/150x220&text=N/A' : details.Poster }}" class="thumbnail animated flip movie-poster">
+            <br>
+            <br>
+            <div ng-if="details.Response==='True'">
+                <img ng-src="{{ details.Poster=='N/A' ? 'http://placehold.it/150x220&text=N/A' : details.Poster }}" class="thumbnail animated flip movie-poster">
 
 
 
-        <p><strong>Released on:</strong> {{ details.Released }} ({{ details.Runtime }})</p>
-          <div class="inner-p"> <strong>Story Line::</strong>{{ details.Plot }}</div>
+                <p><strong>Released on:</strong> {{ details.Released }} ({{ details.Runtime }})</p>
+                <div class="inner-p"> <strong>Story Line::</strong>{{ details.Plot }}</div>
 
-        <p class="outer-p">
-        <div class="inner-p">
-          <span class="label label-primary">Directors :</span> {{ details.Director }}
+                <p class="outer-p">
+                <div class="inner-p">
+                    <span class="label label-primary">Directors :</span> {{ details.Director }}
+                </div>
+                <div class="inner-p">
+                    <span class="label label-primary">Actors :</span> {{ details.Actors }}
+                </div>
+                <div class="inner-p">
+                    <span class="label label-primary">Genre :</span> {{ details.Genre }}
+                </div>
+                </p>
+
+                <p class="outer-p-2">Ratings:
+                    <br>
+                    <strong>IMDb Rating</strong>: <span class="label label-success">{{ details.imdbRating }}</span>
+                    <br>
+                    <strong>Rotten Tomatoes</strong>: <span class="label label-success">{{ details.tomatoRating }}</span>
+                </p>
+
+                <p class="outer-p-3">
+                    <a ng-href="https://www.youtube.com/results?search_query={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Watch Trailers!</a>
+                    <span class="divider"></span>
+                    <a ng-href="http://subscene.com/subtitles/title?q={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Get Subtitles!</a>
+                    <span class="divider"></span>
+                    <a ng-href="http://www.theost.com/search/custom/?key={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Hear Soundtracks!</a>
+                    <span class="divider"></span>
+                    <a ng-href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Buy this movie!</a>
+                </p>
+            </div>
+
+            <div ng-if="details.Response==='False'">
+
+            </div>
+
+
+            <div id="related-results" class="col-md-6 animated bounce related-results">
+                <div ng-if="related.Response!=='False'">
+                    Related Results:
+                    <hr>
+
+                    <ul class="rel-results">
+                        <li ng-repeat="movie in related.Search.slice(1,related.Search.length)">
+                            <a href="" id="{{ $index + 1 }}" ng-click="call(movie.Title)">{{ movie.Title }}</a>, {{ movie.Year }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+
         </div>
-        <div class="inner-p">
-          <span class="label label-primary">Actors :</span> {{ details.Actors }}
-        </div>
-        <div class="inner-p">
-          <span class="label label-primary">Genre :</span> {{ details.Genre }}
-        </div>
-        </p>
-
-        <p class="outer-p-2">Ratings:
-          <br>
-          <strong>IMDb Rating</strong>: <span class="label label-success">{{ details.imdbRating }}</span>
-          <br>
-          <strong>Rotten Tomatoes</strong>: <span class="label label-success">{{ details.tomatoRating }}</span>
-        </p>
-
-        <p class="outer-p-3">
-          <a ng-href="https://www.youtube.com/results?search_query={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Watch Trailers!</a>
-          <span class="divider"></span>
-          <a ng-href="http://subscene.com/subtitles/title?q={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Get Subtitles!</a>
-          <span class="divider"></span>
-          <a ng-href="http://www.theost.com/search/custom/?key={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Hear Soundtracks!</a>
-          <span class="divider"></span>
-          <a ng-href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{ details.Title }}" target="_blank" class="btn btn-default btn-xs btn-info">Buy this movie!</a>
-        </p>
-      </div>
-
-      <div ng-if="details.Response==='False'">
-
-      </div>
-
-
-    <div id="related-results" class="col-md-4 animated bounce related-results">
-      <div ng-if="related.Response!=='False'">
-        Related Results:
-        <hr>
-
-        <ul class="rel-results">
-          <li ng-repeat="movie in related.Search.slice(1,related.Search.length)">
-            <a href="" id="{{ $index + 1 }}" ng-click="call(movie.Title)">{{ movie.Title }}</a>, {{ movie.Year }}
-          </li>
-        </ul>
-      </div>
     </div>
-
-  </div>
-</div>
