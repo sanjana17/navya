@@ -15,12 +15,6 @@ angular.module('myapp', ['ngRoute'])
         .controller('MovieController', function($routeParams,$scope, $http) {
         this.params=$routeParams;
         $scope.$watch('search', function() {
-            fetch();
-        });
-
-        $scope.search = "";
-
-        function fetch() {
             $http.get("http://www.omdbapi.com/?t=" + $scope.search)
                 .then(function(response) {
                     $scope.details = response.data;
@@ -30,7 +24,11 @@ angular.module('myapp', ['ngRoute'])
                 .then(function(response) {
                     $scope.related = response.data;
                 });
-        }
+        });
+
+        $scope.search = "";
+
+
 
             $scope.update = function(movie) {
             $scope.search = movie.Title;
