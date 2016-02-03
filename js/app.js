@@ -15,12 +15,12 @@ angular.module('myapp', ['ngRoute'])
         .controller('MovieController', function($routeParams,$scope, $http) {
         this.params=$routeParams;
         $scope.call= function(search) {
-            $http.get("http://www.omdbapi.com/?t=" + search)
+            $http.get("http://www.omdbapi.com/?t=" +search)
                 .then(function(response) {
                     $scope.details = response.data;
                 });
 
-            $http.get("http://www.omdbapi.com/?s=" + search)
+            $http.get("http://www.omdbapi.com/?s=" +search)
                 .then(function(response) {
                     $scope.related = response.data;
                 });
